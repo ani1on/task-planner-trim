@@ -63,6 +63,28 @@
    python -m client.main
    ```
 
+   По умолчанию клиент подключается к размещённому API. Для локального сервера
+   задайте адрес перед запуском:
+
+   ```powershell
+   $env:TASK_PLANNER_API_URL = "http://localhost:8000"
+   python -m client.main
+   ```
+
+### Сборка клиента для Windows
+
+Установите зависимости разработки, затем соберите автономный `.exe` из корня
+проекта:
+
+```powershell
+pip install -e ".[dev]"
+python -m PyInstaller --noconfirm --clean --onefile --windowed --name TaskPlanner --add-data "client\themes\light.qss;client\themes" --add-data "client\themes\dark.qss;client\themes" client\main.py
+```
+
+Файл `dist\TaskPlanner.exe` будет подключаться к API по умолчанию. Переменная
+`TASK_PLANNER_API_URL`, если задана на компьютере пользователя, переопределит
+этот адрес.
+
 ## Проверки
 
 ```powershell
