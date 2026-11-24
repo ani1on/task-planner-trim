@@ -1,0 +1,19 @@
+from .base_page import BasePage
+from .dashboard_page import DashboardPage
+from .kanban_page import KanbanPage
+from .login_page import LoginPage
+from .projects_page import ProjectsPage
+from .register_page import RegisterPage
+from .settings_page import SettingsPage
+from .tasks_page import TasksPage
+
+__all__ = [
+    "BasePage",
+    "DashboardPage",
+    "KanbanPage",
+    "LoginPage",
+    "ProjectsPage",
+    "RegisterPage",
+    "SettingsPage",
+    "TasksPage",
+]

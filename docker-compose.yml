@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: task-planner-trim-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-task_planner_trim}
+      POSTGRES_USER: ${POSTGRES_USER:-task_planner_trim}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-task_planner_trim}
+
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+
+    volumes:
+      - task_planner_trim_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  task_planner_trim_postgres_data:
