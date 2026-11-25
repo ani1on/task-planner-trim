@@ -4,7 +4,7 @@ import os
 class Config:
     API_URL = os.getenv(
         "TASK_PLANNER_API_URL",
-        "https://task-planner-trim.onrender.com",
+        "http://localhost:8000",
     )
 
     API_TIMEOUT = int(

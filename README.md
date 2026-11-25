@@ -85,19 +85,6 @@ python -m PyInstaller --noconfirm --clean --onefile --windowed --name TaskPlanne
 `TASK_PLANNER_API_URL`, если задана на компьютере пользователя, переопределит
 этот адрес.
 
-### Сборка в GitHub Actions
-
-Workflow `.github/workflows/build-client.yml` автоматически собирает клиент
-при push и создании pull request. Чтобы скачать сборку:
-
-1. Отправьте проект в GitHub.
-2. Откройте вкладку **Actions** и дождитесь завершения **Build Windows client**.
-3. В результате запуска скачайте artifact `TaskPlanner-Windows`.
-
-Workflow также можно запустить вручную через **Actions → Build Windows client
-→ Run workflow**. `.exe` прикладывается к запуску как artifact и не коммитится
-в репозиторий.
-
 ## Проверки
 
 ```powershell
