@@ -75,6 +75,7 @@ class Project(Base):
     tasks: Mapped[list["Task"]] = relationship(
         "Task",
         back_populates="project",
+        cascade="all, delete-orphan",
     )
 
     def __repr__(self) -> str:

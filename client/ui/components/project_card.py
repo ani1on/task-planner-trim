@@ -143,13 +143,14 @@ class ProjectCard(QFrame):
         members_button.clicked.connect(
             lambda: self.members_requested.emit(self._project_id())
         )
-        delete = QPushButton("Удалить")
-        delete.clicked.connect(
-            lambda: self.delete_requested.emit(self._project_id())
-        )
         actions.addWidget(save)
         actions.addWidget(members_button)
-        actions.addWidget(delete)
+        if project.get("role") == "owner":
+            delete = QPushButton("Удалить")
+            delete.clicked.connect(
+                lambda: self.delete_requested.emit(self._project_id())
+            )
+            actions.addWidget(delete)
         details_layout.addLayout(actions)
         self.details_layout = details_layout
         self.details.hide()

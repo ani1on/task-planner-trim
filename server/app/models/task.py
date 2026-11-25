@@ -128,5 +128,6 @@ class Task(Base):
     comments: Mapped[list["Comment"]] = relationship(
         "Comment",
         back_populates="task",
+        cascade="all, delete-orphan",
     )
 

@@ -84,6 +84,26 @@ def test_project_crud(auth_client: TestClient) -> None:
     assert auth_client.get(f"/projects/{project['id']}").status_code == 404
 
 
+def test_project_delete_cascades_to_tasks_and_comments(
+    auth_client: TestClient,
+) -> None:
+    project = create_project(auth_client)
+    task = create_task(auth_client, project["id"])
+    comment_response = auth_client.post(
+        "/comments",
+        json={"task_id": task["id"], "content": "Комментарий"},
+    )
+    assert comment_response.status_code == 201, comment_response.text
+    comment = comment_response.json()
+
+    deleted = auth_client.delete(f"/projects/{project['id']}")
+
+    assert deleted.status_code == 200, deleted.text
+    assert auth_client.get(f"/projects/{project['id']}").status_code == 404
+    assert auth_client.get(f"/tasks/{task['id']}").status_code == 404
+    assert auth_client.get(f"/comments/{comment['id']}").status_code == 404
+
+
 def test_project_not_found(auth_client: TestClient) -> None:
     response = auth_client.get("/projects/999999")
 

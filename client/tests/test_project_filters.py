@@ -149,3 +149,15 @@ def test_project_card_keeps_status_dropdown_without_archive_or_progress_buttons(
     assert not any("архив" in text or "прогресс" in text for text in button_texts)
 
 
+def test_project_delete_button_is_only_shown_to_owner(qapp):
+    project = {"id": 1, "name": "Проект", "status": "active"}
+    owner_card = ProjectCard({**project, "role": "owner"})
+    member_card = ProjectCard({**project, "role": "admin"})
+
+    owner_buttons = [button.text() for button in owner_card.findChildren(QPushButton)]
+    member_buttons = [button.text() for button in member_card.findChildren(QPushButton)]
+
+    assert "Удалить" in owner_buttons
+    assert "Удалить" not in member_buttons
+
+
